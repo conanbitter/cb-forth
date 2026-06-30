@@ -7,15 +7,11 @@ typedef void CodeFunc(Cell* data);
 #define STACK_SIZE (32)
 #define RSTACK_SIZE (16)
 
-Cell* code_ptr = NULL;
+Cell* word_ptr = NULL;
 Cell stack[STACK_SIZE];
-Cell* stack_ptr = &stack;
+Cell* stack_ptr = stack;
 Cell rstack[RSTACK_SIZE];
-Cell* rstack_ptr = &stack;
-
-inline void next() {
-    code_ptr++;
-}
+Cell* rstack_ptr = rstack;
 
 void spush(Cell data) {
     *stack_ptr = data;
@@ -40,34 +36,48 @@ Cell rpop() {
 }
 
 void code_docol(Cell* data) {
-    rpush((Cell)code_ptr);
-    code_ptr = data + 1;
+    rpush((Cell)word_ptr);
+    word_ptr = data + 1;
 }
 
 void code_exit(Cell* data) {
-    code_ptr = (Cell*)rpop();
+    word_ptr = (Cell*)rpop();
 }
 
 void code_branch(Cell* data) {
-
+    Cell offset = *word_ptr;
+    word_ptr += offset;
 }
 
 void code_zbranch(Cell* data) {
-
+    if (spop() == 0) {
+        Cell offset = *word_ptr;
+        word_ptr += offset;
+    } else {
+        word_ptr++;
+    }
 }
 
 void code_lit(Cell* data) {
-
+    spush(*word_ptr);
+    word_ptr++;
 }
 
-const Cell static_dict[] = {
-    (Cell)&code_docol
+const Cell static_dict[5] = {
+    1,
+    2,
+    (Cell)&code_docol,
+    3,
+    (Cell)(static_dict + 2),
 };
 
 int main() {
-    code_ptr = &static_dict;
+    word_ptr = (Cell*)(static_dict + 4);
     while (1) {
-        (**(CodeFunc**)code_ptr)(code_ptr);
+        Cell* word = (Cell*)*word_ptr;
+        word_ptr++;
+        CodeFunc* code = (CodeFunc*)*word;
+        (*code)(word);
     }
     return 0;
 }

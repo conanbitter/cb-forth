@@ -6,10 +6,13 @@ set(EXECUTABLE_OUTPUT_PATH ./${CMAKE_BUILD_TYPE})
 
 set(INCLUDE_FILES
     common.h
+    core.h
 )
 
 set(SRC_FILES
     main.c
+    core.c
+    dict.c
 )
 
 list(TRANSFORM INCLUDE_FILES PREPEND ${CMAKE_CURRENT_SOURCE_DIR}/include/)

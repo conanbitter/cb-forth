@@ -1,0 +1,35 @@
+{
+    "words": [
+        { "type": "native", "words": [
+            { "name": "EXIT",    "code": "exit"    },
+            { "name": "BRANCH",  "code": "branch"  },
+            { "name": "0BRANCH", "code": "zbranch" },
+            { "name": "LIT",     "code": "lit"     },
+            { "name": "DROP",    "code": "drop"    },
+            { "name": "SWAP",    "code": "swap"    },
+            { "name": "DUP",     "code": "dup"     },
+            { "name": "OVER",    "code": "over"    },
+            { "name": "ROT",     "code": "rot"     },
+            { "name": "-ROT",    "code": "nrot"    },
+            { "name": "2DROP",   "code": "drop2"   },
+            { "name": "2SWAP",   "code": "swap2"   },
+            { "name": "2DUP",    "code": "dup2"    },
+            { "name": "?DUP",    "code": "qdup"    },
+            { "name": "1+",      "code": "inc"     },
+            { "name": "1-",      "code": "dec"     },
+            { "name": "2+",      "code": "inc2"    },
+            { "name": "2-",      "code": "dec2"    },
+            { "name": "2*",      "code": "mul2"    },
+            { "name": "2/",      "code": "div2"    },
+            { "name": "4+",      "code": "inc4"    },
+            { "name": "4-",      "code": "dec4"    },
+            { "name": "4*",      "code": "mul4"    },
+            { "name": "4/",      "code": "div4"    },
+            { "name": "+",       "code": "add"     },
+            { "name": "-",       "code": "sub"     },
+            { "name": "=",       "code": "eq"      },
+            { "name": "<>",      "code": "neq"     },
+            { "name": "CR",      "code": "cr"      }
+        ] }
+    ]
+}

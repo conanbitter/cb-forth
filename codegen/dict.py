@@ -72,7 +72,7 @@ def add_native(entry):
 
 def add_const(word_entry):
     new_word = DictWord(word_entry['name'], 'lit', [])
-    new_word.data.append(word_entry['const'])
+    new_word.data.append(str(word_entry['const']))
     add_word(new_word)
 
 
@@ -122,5 +122,29 @@ for entry in words:
     else:
         proc_fun(entry)
 
+format_table = []
+data_table = []
+
 for word in sysdict:
-    print(word.__dict__)
+    col1 = "0" if word.prev is None else abs_address(word.prev) + ", "
+    col2 = ", ".join(word.flagname) + ", "
+    col3 = word.code + (", " if len(word.data) > 0 else ",")
+    col4 = (", ".join(word.data) + ",") if len(word.data) > 0 else None
+    col5 = f" // {word.name}"
+    format_table.append([col1, col2, col3, col5])
+    data_table.append(col4)
+    # print(word.__dict__)
+
+cols = [0] * 5
+
+for row in format_table:
+    for i, col in enumerate(row):
+        if len(col) > cols[i]:
+            cols[i] = len(col)
+
+for row, data in zip(format_table, data_table):
+    for col, l in zip(row, cols):
+        print(f"{col:{l}}", end='')
+    print()
+    if data is not None:
+        print("    " + data)

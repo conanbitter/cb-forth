@@ -30,6 +30,20 @@
             { "name": "=",       "code": "eq"      },
             { "name": "<>",      "code": "neq"     },
             { "name": "CR",      "code": "cr"      }
-        ] }
+        ] },
+
+        { "type": "const", "words":[
+            { "name": "CELL",    "const": 4         },
+            { "name": "VERSION", "const": "VERSION" }
+        ]},
+
+        { "type": "var", "name":"LATEST", "var":"latest" },
+
+        { "type": "forth", "name": "QUIT", "body":[
+            "DUP",
+			"BRANCH", 4,
+			"SWAP",
+			"EXIT"
+        ]}
     ]
 }

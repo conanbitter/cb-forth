@@ -13,4 +13,6 @@ typedef void CodeFunc(Cell* data);
 #include "core.h"
 extern Cell* const CONST_SYS_LAST;
 
+#include "io.h"
+
 #endif

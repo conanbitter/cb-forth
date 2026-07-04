@@ -4,6 +4,8 @@
 #include "common.h"
 
 extern Cell* word_ptr;
+extern Cell error;
+extern Cell base;
 
 void init();
 

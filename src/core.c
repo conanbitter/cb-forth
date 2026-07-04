@@ -8,9 +8,14 @@ static Cell* stack_ptr;
 static Cell rstack[RSTACK_SIZE];
 static Cell* rstack_ptr;
 
+Cell error;
+Cell base;
+
 void init() {
     stack_ptr = stack;
     rstack_ptr = rstack;
+    base = 10;
+    error = 0;
 }
 
 void spush(Cell data) {

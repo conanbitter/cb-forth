@@ -132,3 +132,15 @@ void print_int(Cell value) {
         putchar(buffer[i]);
     }
 }
+
+void print_char(char value) {
+    putchar(value);
+}
+
+void print_str(const char* value) {
+    printf(value);
+}
+
+void print_str_fixed(const char* value, Cell length) {
+    printf("%.*s", length, value);
+}

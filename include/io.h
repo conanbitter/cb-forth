@@ -10,6 +10,9 @@ void print_word();
 
 Cell str_to_int();
 void print_int(Cell value);
+void print_char(char value);
+void print_str(const char* value);
+void print_str_fixed(const char* value, Cell length);
 
 extern Cell word_len;
 

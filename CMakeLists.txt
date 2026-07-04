@@ -8,6 +8,7 @@ set(INCLUDE_FILES
     common.h
     core.h
     io.h
+    native_words.h
 )
 
 set(SRC_FILES
@@ -15,6 +16,7 @@ set(SRC_FILES
     core.c
     dict.c
     io.c
+    native_words.c
 )
 
 list(TRANSFORM INCLUDE_FILES PREPEND ${CMAKE_CURRENT_SOURCE_DIR}/include/)

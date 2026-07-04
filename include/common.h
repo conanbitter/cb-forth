@@ -14,5 +14,6 @@ typedef void CodeFunc(Cell* data);
 extern Cell* const CONST_SYS_LAST;
 
 #include "io.h"
+#include "native_words.h"
 
 #endif

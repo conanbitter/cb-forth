@@ -3,6 +3,9 @@
 
 #include <stdint.h>
 
+#define FORTH_TRUE (-1)
+#define FORTH_FALSE (0)
+
 typedef intptr_t Cell;
 typedef void CodeFunc(Cell* data);
 

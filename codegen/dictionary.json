@@ -29,6 +29,8 @@
             { "name": "-",       "code": "sub"     },
             { "name": "=",       "code": "eq"      },
             { "name": "<>",      "code": "neq"     },
+            { "name": "<",       "code": "less"    },
+            { "name": ">",       "code": "greater" },
             { "name": "CR",      "code": "cr"      }
         ] },
 

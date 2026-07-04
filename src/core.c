@@ -29,6 +29,10 @@ Cell spop() {
     return data;
 }
 
+Cell speek(Cell depth) {
+    return *(stack_ptr - depth);
+}
+
 void rpush(Cell data) {
     *rstack_ptr = data;
     rstack_ptr++;

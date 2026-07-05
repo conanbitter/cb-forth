@@ -10,12 +10,14 @@ static Cell* rstack_ptr;
 
 Cell error;
 Cell base;
+Cell* latest;
 
 void init() {
     stack_ptr = stack;
     rstack_ptr = rstack;
     base = 10;
     error = 0;
+    latest = (Cell*)SYS_LATEST;
 }
 
 void spush(Cell data) {

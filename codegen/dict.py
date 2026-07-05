@@ -133,7 +133,8 @@ for word in sysdict:
     col3 = "(Cell)&code_" + word.code + (", " if len(word.data) > 0 else ",")
     col4 = (", ".join(word.data) + ",") if len(word.data) > 0 else None
     col5 = f" // {word.name}"
-    format_table.append([col1, col2, col3, col5])
+    col6 = f" [{word.address}]"
+    format_table.append([col1, col2, col3, col5, col6])
     data_table.append(col4)
     total_cells += 1 + len(word.flagname) + 1 + len(word.data)
     # print(word.__dict__)

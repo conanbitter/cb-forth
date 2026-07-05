@@ -5,6 +5,7 @@
 
 #define FORTH_TRUE (-1)
 #define FORTH_FALSE (0)
+#define LENGTH_MASK (0b00011111)
 
 typedef intptr_t Cell;
 typedef void CodeFunc(Cell* data);
@@ -16,6 +17,7 @@ typedef void CodeFunc(Cell* data);
 
 #include "core.h"
 extern const Cell* SYS_LATEST;
+extern const Cell sys_dict[];
 
 #include "io.h"
 #include "native_words.h"

@@ -2,19 +2,18 @@
 #include "common.h"
 
 int main() {
-    base = 10;
+    init();
     while (1)
     {
-        print_int(CELL_WIDTH);
         code_query();
         while (1) {
             get_word();
             if (word_len == 0) break;
-            Cell num = str_to_int();
-            if (error == 0) {
-                printf("number: %d\n", num);
+            Cell* word = find_word();
+            if (word == NULL) {
+                printf("Not found");
             } else {
-                print_word();
+                printf("Found: sys_dict + %d", word - sys_dict);
             }
         }
     }

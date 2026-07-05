@@ -31,5 +31,6 @@ void code_less(Cell data);
 void code_greater(Cell data);
 void code_cr(Cell data);
 
+Cell* find_word();
 
 #endif

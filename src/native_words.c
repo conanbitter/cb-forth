@@ -166,3 +166,35 @@ void code_greater(Cell data) {
 void code_cr(Cell data) {
     print_char('\n');
 }
+
+// ===================
+//   WORD MANAGEMENT
+// ===================
+
+Cell* find_word() {
+    Cell* current_word = latest;
+    while (current_word != NULL) {
+        Cell* prev = (Cell*)*current_word;
+        Cell* this_word = current_word;
+        current_word++;
+        uint8_t length = (*((uint8_t*)current_word)) & LENGTH_MASK;
+        if (length != word_len) {
+            current_word = prev;
+            continue;
+        }
+        char* dict_word = (char*)current_word + 1;
+        char* buf_word = word_buffer;
+        for (int i = 0;i < length;i++) {
+            if (*dict_word != *buf_word) {
+                current_word = prev;
+                break;
+            }
+            dict_word++;
+            buf_word++;
+        }
+        if (current_word != prev) {
+            return this_word;
+        }
+    }
+    return NULL;
+}

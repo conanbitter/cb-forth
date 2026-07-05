@@ -15,5 +15,6 @@ void print_str(const char* value);
 void print_str_fixed(const char* value, Cell length);
 
 extern Cell word_len;
+extern char word_buffer[];
 
 #endif

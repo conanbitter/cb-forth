@@ -5,7 +5,7 @@ int main() {
     base = 10;
     while (1)
     {
-        print_int(105);
+        print_int(CELL_WIDTH);
         code_query();
         while (1) {
             get_word();

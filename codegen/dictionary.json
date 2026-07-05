@@ -1,6 +1,7 @@
 {
     "words": [
         { "type": "native", "words": [
+            { "name": "DOCOL",   "code": "docol"   },
             { "name": "EXIT",    "code": "exit"    },
             { "name": "BRANCH",  "code": "branch"  },
             { "name": "0BRANCH", "code": "zbranch" },
@@ -35,11 +36,12 @@
         ] },
 
         { "type": "const", "words":[
-            { "name": "CELL",    "const": 4         },
-            { "name": "VERSION", "const": "VERSION" }
+            { "name": "CELL",    "const": "CELL_WIDTH" },
+            { "name": "VERSION", "const": "VERSION"    }
         ]},
 
-        { "type": "var", "name":"LATEST", "var":"latest" },
+        { "type": "var", "name":"BASE", "var":"base" },
+        { "type": "var", "name":"ERRCODE", "var":"error" },
 
         { "type": "forth", "name": "QUIT", "body":[
             "DUP",

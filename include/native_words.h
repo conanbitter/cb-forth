@@ -27,6 +27,8 @@ void code_add(Cell data);
 void code_sub(Cell data);
 void code_eq(Cell data);
 void code_neq(Cell data);
+void code_less(Cell data);
+void code_greater(Cell data);
 void code_cr(Cell data);
 
 

@@ -10,11 +10,12 @@ typedef intptr_t Cell;
 typedef void CodeFunc(Cell* data);
 
 #define CELL_WIDTH (sizeof(Cell))
+#define VERSION (1)
 #define STACK_SIZE (32)
 #define RSTACK_SIZE (16)
 
 #include "core.h"
-extern Cell* const CONST_SYS_LAST;
+extern const Cell* SYS_LATEST;
 
 #include "io.h"
 #include "native_words.h"

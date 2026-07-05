@@ -3,6 +3,7 @@ from math import ceil
 import struct
 
 DICT_NAME = "sys_dict"
+LATEST_NAME = "SYS_LATEST"
 CELL_WIDTH = 4
 FLAG_IMMED = 0b10000000
 FLAG_COMPONLY = 0b01000000
@@ -91,7 +92,7 @@ def add_forth(word_entry):
     new_word = DictWord(word_entry['name'], 'docol', word_entry.get('flags', []))
     for word in word_entry['body']:
         if type(word) is str:
-            new_word.data.append(abs_address(get_wordcode(word)))
+            new_word.data.append(f"(Cell)({abs_address(get_wordcode(word))})")
         elif type(word) is int:
             new_word.data.append(str(word))
     add_word(new_word)
@@ -124,16 +125,19 @@ for entry in words:
 
 format_table = []
 data_table = []
+total_cells = 0
 
 for word in sysdict:
-    col1 = "0" if word.prev is None else abs_address(word.prev) + ", "
+    col1 = "(Cell)NULL," if word.prev is None else f"(Cell)({abs_address(word.prev)}), "
     col2 = ", ".join(word.flagname) + ", "
-    col3 = word.code + (", " if len(word.data) > 0 else ",")
+    col3 = "(Cell)&code_" + word.code + (", " if len(word.data) > 0 else ",")
     col4 = (", ".join(word.data) + ",") if len(word.data) > 0 else None
     col5 = f" // {word.name}"
     format_table.append([col1, col2, col3, col5])
     data_table.append(col4)
+    total_cells += 1 + len(word.flagname) + 1 + len(word.data)
     # print(word.__dict__)
+
 
 cols = [0] * 5
 
@@ -142,9 +146,13 @@ for row in format_table:
         if len(col) > cols[i]:
             cols[i] = len(col)
 
-for row, data in zip(format_table, data_table):
-    for col, l in zip(row, cols):
-        print(f"{col:{l}}", end='')
-    print()
-    if data is not None:
-        print("    " + data)
+with open("dict.c", 'w') as f:
+    f.write(f"static const Cell {DICT_NAME}[{total_cells}] = {{\n")
+    for row, data in zip(format_table, data_table):
+        f.write("    ")
+        for col, l in zip(row, cols):
+            f.write(f"{col:{l}}")
+        f.write("\n")
+        if data is not None:
+            f.write("        " + data + "\n")
+    f.write(f"}};\n\nconst Cell* {LATEST_NAME} = {DICT_NAME} + {latest.address};")

@@ -1,5 +1,3 @@
-#include "common.h"
-
 static const Cell sys_dict[143] = {
     (Cell)NULL,             0x434F4405, 0x02004C4F,             (Cell)&code_docol,   // DOCOL  
     (Cell)(sys_dict + 0),   0x49584504, 0x02000054,             (Cell)&code_exit,    // EXIT   

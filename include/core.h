@@ -13,6 +13,7 @@ void init();
 void spush(Cell data);
 Cell spop();
 Cell speek(Cell depth);
+void sdump();
 
 void rpush(Cell data);
 Cell rpop();

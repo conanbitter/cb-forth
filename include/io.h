@@ -1,8 +1,8 @@
 #ifndef IO_H
 #define IO_H
 
-void code_query();
-void code_key();
+void code_query(Cell data);
+void code_key(Cell data);
 
 char get_key();
 void get_word();

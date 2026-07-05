@@ -10,7 +10,7 @@ char word_buffer[INPUT_WORD_SIZE];
 Cell word_len = 0;
 char* caret;
 
-void code_query() {
+void code_query(Cell data) {
     while (1) {
         fflush(stdout);
 
@@ -41,7 +41,7 @@ char get_key() {
     return *(caret++);
 }
 
-void code_key() {
+void code_key(Cell data) {
     spush((Cell)get_key());
 }
 
@@ -77,7 +77,7 @@ void print_word() {
 
 Cell get_digit(char input) {
     Cell result = -1;
-    if (input >= '0' && input <= '1') {
+    if (input >= '0' && input <= '9') {
         result = input - '0';
     } else if (input >= 'A' && input <= 'Z') {
         result = input - 'A' + 10;

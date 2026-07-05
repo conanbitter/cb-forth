@@ -19,6 +19,7 @@ typedef void CodeFunc(Cell* data);
 extern const Cell* SYS_LATEST;
 extern const Cell sys_dict[];
 
+#include "errors.h"
 #include "io.h"
 #include "native_words.h"
 

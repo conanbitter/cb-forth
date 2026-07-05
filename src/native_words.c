@@ -198,3 +198,39 @@ Cell* find_word() {
     }
     return NULL;
 }
+
+Cell* get_cfa(Cell* word) {
+    uint8_t name_length = (*((uint8_t*)(word + 1))) & LENGTH_MASK;
+    Cell name_length_cells = (name_length + 2 + (CELL_WIDTH - 1)) / CELL_WIDTH;
+    return word + 1 + name_length_cells;
+}
+
+Cell* get_wha(Cell* word_code) {
+    uint8_t name_length_cells = (*((uint8_t*)word_code - 1)) & LENGTH_MASK;
+    return word_code - 1 - name_length_cells;
+}
+
+void code_parse(Cell data) {
+    get_word();
+
+    if (word_len == 0) {
+        error = ERROR_EOF;
+        return;
+    }
+
+    Cell* word = find_word();
+    if (word != NULL) {
+        error = ERROR_NOERROR;
+        word_ptr = get_cfa(word);
+        return;
+    }
+
+    Cell num = str_to_int();
+    if (error == 0) {
+        error = ERROR_NOERROR;
+        spush(num);
+        return;
+    }
+
+    error = ERROR_UNKNOWN_WORD;
+}

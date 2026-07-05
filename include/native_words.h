@@ -32,5 +32,8 @@ void code_greater(Cell data);
 void code_cr(Cell data);
 
 Cell* find_word();
+Cell* get_cfa(Cell* word);
+Cell* get_wha(Cell* word_code);
+void code_parse(Cell data);
 
 #endif

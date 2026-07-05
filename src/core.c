@@ -35,6 +35,16 @@ Cell speek(Cell depth) {
     return *(stack_ptr - depth);
 }
 
+void sdump() {
+    Cell* cur = stack_ptr;
+    cur--;
+    while (cur >= stack)
+    {
+        printf("%d ", *cur);
+        cur--;
+    }
+}
+
 void rpush(Cell data) {
     *rstack_ptr = data;
     rstack_ptr++;

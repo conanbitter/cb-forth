@@ -6,6 +6,9 @@
 #define FORTH_TRUE (-1)
 #define FORTH_FALSE (0)
 #define LENGTH_MASK (0b00011111)
+#define FLAG_IMMED (0b10000000)
+#define FLAG_COMPONLY (0b01000000)
+#define FLAG_HIDDEN (0b00100000)
 
 typedef intptr_t Cell;
 typedef void CodeFunc(Cell* data);

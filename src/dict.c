@@ -1,11 +1,11 @@
 #include "common.h"
 
 const Cell sys_dict[143] = {
-    (Cell)NULL,             0x434F4405, 0x02004C4F,             (Cell)&code_docol,   // DOCOL   [0]  
-    (Cell)(sys_dict + 0),   0x49584504, 0x02000054,             (Cell)&code_exit,    // EXIT    [4]  
-    (Cell)(sys_dict + 4),   0x41524206, 0x0248434E,             (Cell)&code_branch,  // BRANCH  [8]  
-    (Cell)(sys_dict + 8),   0x52423007, 0x48434E41, 0x03000000, (Cell)&code_zbranch, // 0BRANCH [12] 
-    (Cell)(sys_dict + 12),  0x54494C03, 0x02000000,             (Cell)&code_lit,     // LIT     [17] 
+    (Cell)NULL,             0x434F4425, 0x22004C4F,             (Cell)&code_docol,   // DOCOL   [0]  
+    (Cell)(sys_dict + 0),   0x49584544, 0x42000054,             (Cell)&code_exit,    // EXIT    [4]  
+    (Cell)(sys_dict + 4),   0x41524246, 0x4248434E,             (Cell)&code_branch,  // BRANCH  [8]  
+    (Cell)(sys_dict + 8),   0x52423047, 0x48434E41, 0x43000000, (Cell)&code_zbranch, // 0BRANCH [12] 
+    (Cell)(sys_dict + 12),  0x54494C43, 0x42000000,             (Cell)&code_lit,     // LIT     [17] 
     (Cell)(sys_dict + 17),  0x4F524404, 0x02000050,             (Cell)&code_drop,    // DROP    [21] 
     (Cell)(sys_dict + 21),  0x41575304, 0x02000050,             (Cell)&code_swap,    // SWAP    [25] 
     (Cell)(sys_dict + 25),  0x50554403, 0x02000000,             (Cell)&code_dup,     // DUP     [29] 

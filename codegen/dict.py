@@ -7,6 +7,7 @@ LATEST_NAME = "SYS_LATEST"
 CELL_WIDTH = 4
 FLAG_IMMED = 0b10000000
 FLAG_COMPONLY = 0b01000000
+FLAG_HIDDEN = 0b00100000
 
 
 def encode_name(name, flags):
@@ -15,6 +16,8 @@ def encode_name(name, flags):
         byte_flags |= FLAG_IMMED
     if 'componly' in flags:
         byte_flags |= FLAG_COMPONLY
+    if 'hidden' in flags:
+        byte_flags |= FLAG_HIDDEN
 
     first_byte = len(name) | byte_flags
     name_cells = ceil((len(name) + 2) / CELL_WIDTH)

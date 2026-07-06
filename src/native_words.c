@@ -177,7 +177,12 @@ Cell* find_word() {
         Cell* prev = (Cell*)*current_word;
         Cell* this_word = current_word;
         current_word++;
-        uint8_t length = (*((uint8_t*)current_word)) & LENGTH_MASK;
+        uint8_t flags = *(uint8_t*)current_word;
+        if (flags & FLAG_HIDDEN) {
+            current_word = prev;
+            continue;
+        }
+        uint8_t length = flags & LENGTH_MASK;
         if (length != word_len) {
             current_word = prev;
             continue;

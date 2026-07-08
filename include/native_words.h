@@ -25,6 +25,8 @@ void code_mul4(Cell data);
 void code_div4(Cell data);
 void code_add(Cell data);
 void code_sub(Cell data);
+void code_mul(Cell data);
+void code_div(Cell data);
 void code_eq(Cell data);
 void code_neq(Cell data);
 void code_less(Cell data);
@@ -35,5 +37,8 @@ Cell* find_word();
 Cell* get_cfa(Cell* word);
 Cell* get_wha(Cell* word_code);
 void code_parse(Cell data);
+
+void code_dot(Cell data);
+void code_pstack(Cell data);
 
 #endif

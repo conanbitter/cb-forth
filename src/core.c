@@ -26,13 +26,13 @@ void spush(Cell data) {
 }
 
 Cell spop() {
-    Cell data = *stack_ptr;
     stack_ptr--;
+    Cell data = *stack_ptr;
     return data;
 }
 
 Cell speek(Cell depth) {
-    return *(stack_ptr - depth);
+    return *(stack_ptr - depth - 1);
 }
 
 void sdump() {
@@ -51,8 +51,8 @@ void rpush(Cell data) {
 }
 
 Cell rpop() {
-    Cell data = *rstack_ptr;
     rstack_ptr--;
+    Cell data = *rstack_ptr;
     return data;
 }
 

@@ -9,13 +9,9 @@ int main() {
         while (1) {
             code_parse(0);
             if (error != ERROR_NOERROR) {
-                printf("Error: %d\n", error);
+                printf("\nError: %d\n", error);
                 break;
             }
-            printf("word_ptr = sys_dict + %d\n", word_ptr - sys_dict);
-            printf("stack: ");
-            sdump();
-            printf("\n\n");
         }
     }
 

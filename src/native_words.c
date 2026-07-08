@@ -139,6 +139,18 @@ void code_sub(Cell data) {
     spush(b - a);
 }
 
+void code_mul(Cell data) {
+    Cell a = spop();
+    Cell b = spop();
+    spush(b * a);
+}
+
+void code_div(Cell data) {
+    Cell a = spop();
+    Cell b = spop();
+    spush(b / a);
+}
+
 void code_eq(Cell data) {
     Cell a = spop();
     Cell b = spop();
@@ -226,7 +238,10 @@ void code_parse(Cell data) {
     Cell* word = find_word();
     if (word != NULL) {
         error = ERROR_NOERROR;
-        word_ptr = get_cfa(word);
+        Cell* word_code = get_cfa(word);
+        CodeFunc* code = (CodeFunc*)*word_code;
+        //printf("Running [sys_dict + %d]\n", word - sys_dict);
+        (*code)(word);
         return;
     }
 
@@ -238,4 +253,17 @@ void code_parse(Cell data) {
     }
 
     error = ERROR_UNKNOWN_WORD;
+}
+
+// ================
+//   INPUT/OUTPUT
+// ================
+
+void code_dot(Cell data) {
+    Cell value = spop();
+    print_int(value);
+}
+
+void code_pstack(Cell data) {
+    sdump();
 }

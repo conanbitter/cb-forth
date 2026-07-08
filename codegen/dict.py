@@ -36,6 +36,7 @@ def encode_name(name, flags):
 class DictWord:
     def __init__(self, name, code, flags):
         self.address = 0
+        self.cfa = 0
         self.prev = 0
         self.name = name
         self.flagname = encode_name(name, flags)
@@ -56,9 +57,14 @@ def abs_address(offset):
     return f"{DICT_NAME} + {offset}"
 
 
+def comp_word(name):
+    return f"(Cell)({abs_address(wordlist[name].cfa)})"
+
+
 def add_word(word):
     global current_pos, latest
     word.address = current_pos
+    word.cfa = word.address + 1 + len(word.flagname)
     if latest is None:
         word.prev = None
     else:
@@ -75,27 +81,22 @@ def add_native(entry):
 
 
 def add_const(word_entry):
-    new_word = DictWord(word_entry['name'], 'lit', [])
-    new_word.data.append(str(word_entry['const']))
+    new_word = DictWord(word_entry['name'], 'docol', [])
+    new_word.data.extend([comp_word('LIT'), str(word_entry['const']), comp_word('EXIT')])
     add_word(new_word)
 
 
 def add_var(word_entry):
     new_word = DictWord(word_entry['name'], 'lit', [])
-    new_word.data.append(f"(Cell)&{word_entry['var']}")
+    new_word.data.extend([comp_word('LIT'), f"(Cell)&{word_entry['var']}", comp_word('EXIT')])
     add_word(new_word)
-
-
-def get_wordcode(name):
-    word = wordlist[name]
-    return word.address + 1 + len(word.flagname)
 
 
 def add_forth(word_entry):
     new_word = DictWord(word_entry['name'], 'docol', word_entry.get('flags', []))
     for word in word_entry['body']:
         if type(word) is str:
-            new_word.data.append(f"(Cell)({abs_address(get_wordcode(word))})")
+            new_word.data.append(comp_word(word))
         elif type(word) is int:
             new_word.data.append(str(word))
     add_word(new_word)
@@ -136,7 +137,7 @@ for word in sysdict:
     col3 = "(Cell)&code_" + word.code + (", " if len(word.data) > 0 else ",")
     col4 = (", ".join(word.data) + ",") if len(word.data) > 0 else None
     col5 = f" // {word.name}"
-    col6 = f" [{word.address}]"
+    col6 = f" [{word.address}, CFA:{word.cfa}]"
     format_table.append([col1, col2, col3, col5, col6])
     data_table.append(col4)
     total_cells += 1 + len(word.flagname) + 1 + len(word.data)

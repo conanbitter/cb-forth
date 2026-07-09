@@ -47,6 +47,33 @@ class DictWord:
         return 2 + len(self.flagname) + len(self.data)
 
 
+class FormatTable:
+    def __init__(self, cols: int) -> None:
+        self.col_count = cols
+        self.col_widths = [0] * (cols - 1)
+        self.rows = []
+
+    def add_row(self, row: list[str]) -> None:
+        self.rows.append(row)
+
+    def __iter__(self):
+        self._index = 0
+        for row in self.rows:
+            for i, col in enumerate(row[:-1]):
+                if len(col) > self.col_widths[i]:
+                    self.col_widths[i] = len(col)
+        return self
+
+    def __next__(self):
+        if self._index >= len(self.rows):
+            raise StopIteration
+
+        row = "".join([f"{col:{l}}" for col, l in zip(self.rows[self._index][:-1], self.col_widths)])
+        row += self.rows[self._index][-1]
+        self._index += 1
+        return row
+
+
 latest = None
 current_pos = 0
 sysdict = []
@@ -127,37 +154,42 @@ for entry in words:
     else:
         proc_fun(entry)
 
-format_table = []
+main_table = FormatTable(6)
 data_table = []
 total_cells = 0
+addresses = {}
 
 for word in sysdict:
-    col1 = "(Cell)NULL," if word.prev is None else f"(Cell)({abs_address(word.prev)}), "
-    col2 = ", ".join(word.flagname) + ", "
-    col3 = "(Cell)&code_" + word.code + (", " if len(word.data) > 0 else ",")
-    col4 = (", ".join(word.data) + ",") if len(word.data) > 0 else None
-    col5 = f" // {word.name}"
-    col6 = f" [{word.address}, CFA:{word.cfa}]"
-    format_table.append([col1, col2, col3, col5, col6])
-    data_table.append(col4)
+    addresses[f"(Cell)({abs_address(word.address)})"] = word.name + "(head)"
+    addresses[f"(Cell)({abs_address(word.cfa)})"] = word.name
+
+for word in sysdict:
+    col_prev = "(Cell)NULL," if word.prev is None else f"(Cell)({abs_address(word.prev)}), "
+    col_flagname = ", ".join(word.flagname) + ", "
+    col_code = "(Cell)&code_" + word.code + (", " if len(word.data) > 0 else ",")
+    col_rem_name = f" // {word.name}"
+    col_rem_address = f" [{word.address}, CFA:{word.cfa}]"
+
+    col_data = None
+    if len(word.data) > 0:
+        col_data = FormatTable(2)
+        for item in word.data:
+            col_data.add_row([item + ",", "" if item not in addresses else "  // " + addresses[item]])
+
+    main_table.add_row([col_prev, col_flagname, col_code, col_rem_name, col_rem_address])
+    data_table.append(col_data)
+
     total_cells += 1 + len(word.flagname) + 1 + len(word.data)
-    # print(word.__dict__)
-
-
-cols = [0] * 5
-
-for row in format_table:
-    for i, col in enumerate(row):
-        if len(col) > cols[i]:
-            cols[i] = len(col)
 
 with open("dict.c", 'w') as f:
     f.write(f"static const Cell {DICT_NAME}[{total_cells}] = {{\n")
-    for row, data in zip(format_table, data_table):
+    for row, data in zip(main_table, data_table):
         f.write("    ")
-        for col, l in zip(row, cols):
-            f.write(f"{col:{l}}")
+        f.write(row)
         f.write("\n")
         if data is not None:
-            f.write("        " + data + "\n")
+            for data_item in data:
+                f.write("        " + data_item + "\n")
+            f.write("\n")
+
     f.write(f"}};\n\nconst Cell* {LATEST_NAME} = {DICT_NAME} + {latest.address};")

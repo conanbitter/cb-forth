@@ -50,10 +50,8 @@
         { "type": "forth", "name": "QUIT", "body":[
             "LIT",
             0,
-            "LIT",
-            2,
-            "LIT",
-            3,
+            "CELL",
+            "BASE",
             "*",
             "DUP",
             "+",

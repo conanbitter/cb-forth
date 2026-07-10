@@ -1,6 +1,6 @@
 #include "common.h"
 
-const Cell sys_dict[174] = {
+const Cell sys_dict[172] = {
     (Cell)NULL,             0x434F4425, 0x22004C4F,             (Cell)&code_docol,   // DOCOL   [0, CFA:3]
     (Cell)(sys_dict + 0),   0x49584544, 0x42000054,             (Cell)&code_exit,    // EXIT    [4, CFA:7]
     (Cell)(sys_dict + 4),   0x41524246, 0x4248434E,             (Cell)&code_branch,  // BRANCH  [8, CFA:11]
@@ -37,6 +37,7 @@ const Cell sys_dict[174] = {
     (Cell)(sys_dict + 112), 0x01003C01,                         (Cell)&code_less,    // <       [115, CFA:117]
     (Cell)(sys_dict + 115), 0x01003E01,                         (Cell)&code_greater, // >       [118, CFA:120]
     (Cell)(sys_dict + 118), 0x01524302,                         (Cell)&code_cr,      // CR      [121, CFA:123]
+
     (Cell)(sys_dict + 121), 0x4C454304, 0x0200004C,             (Cell)&code_docol,   // CELL    [124, CFA:127]
         (Cell)(sys_dict + 20),  // LIT
         CELL_WIDTH,           
@@ -47,12 +48,12 @@ const Cell sys_dict[174] = {
         VERSION,              
         (Cell)(sys_dict + 7),   // EXIT
 
-    (Cell)(sys_dict + 131), 0x53414204, 0x02000045,             (Cell)&code_lit,     // BASE    [139, CFA:142]
+    (Cell)(sys_dict + 131), 0x53414204, 0x02000045,             (Cell)&code_docol,   // BASE    [139, CFA:142]
         (Cell)(sys_dict + 20),  // LIT
         (Cell)&base,          
         (Cell)(sys_dict + 7),   // EXIT
 
-    (Cell)(sys_dict + 139), 0x52524507, 0x45444F43, 0x03000000, (Cell)&code_lit,     // ERRCODE [146, CFA:150]
+    (Cell)(sys_dict + 139), 0x52524507, 0x45444F43, 0x03000000, (Cell)&code_docol,   // ERRCODE [146, CFA:150]
         (Cell)(sys_dict + 20),  // LIT
         (Cell)&error,         
         (Cell)(sys_dict + 7),   // EXIT
@@ -60,10 +61,8 @@ const Cell sys_dict[174] = {
     (Cell)(sys_dict + 146), 0x49555104, 0x02000054,             (Cell)&code_docol,   // QUIT    [154, CFA:157]
         (Cell)(sys_dict + 20),   // LIT
         0,                     
-        (Cell)(sys_dict + 20),   // LIT
-        2,                     
-        (Cell)(sys_dict + 20),   // LIT
-        3,                     
+        (Cell)(sys_dict + 127),  // CELL
+        (Cell)(sys_dict + 142),  // BASE
         (Cell)(sys_dict + 105),  // *
         (Cell)(sys_dict + 38),   // DUP
         (Cell)(sys_dict + 99),   // +

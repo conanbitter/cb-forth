@@ -1,6 +1,6 @@
 #include "common.h"
 
-const Cell sys_dict[172] = {
+static const Cell sys_dict[172] = {
     (Cell)NULL,             0x434F4425, 0x22004C4F,             (Cell)&code_docol,   // DOCOL   [0, CFA:3]
     (Cell)(sys_dict + 0),   0x49584544, 0x42000054,             (Cell)&code_exit,    // EXIT    [4, CFA:7]
     (Cell)(sys_dict + 4),   0x41524246, 0x4248434E,             (Cell)&code_branch,  // BRANCH  [8, CFA:11]
@@ -76,4 +76,6 @@ const Cell sys_dict[172] = {
 
 };
 
-const Cell* SYS_LATEST = sys_dict + 154;
+const Cell* SYS_LATEST    = sys_dict + 154;
+const Cell* SYS_QUIT_CFA  = sys_dict + 157;
+const Cell* SYS_DOCOL_CFA = sys_dict + 3;

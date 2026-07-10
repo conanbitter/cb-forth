@@ -15,7 +15,7 @@ int main() {
         }
     }*/
 
-    word_ptr = sys_dict + 158;
+    word_ptr = (Cell*)(SYS_QUIT_CFA + 1);
     while (1) {
         Cell* word = (Cell*)*word_ptr;
         word_ptr++;

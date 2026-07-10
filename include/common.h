@@ -20,7 +20,8 @@ typedef void CodeFunc(Cell* data);
 
 #include "core.h"
 extern const Cell* SYS_LATEST;
-extern const Cell sys_dict[];
+extern const Cell* SYS_QUIT_CFA;
+extern const Cell* SYS_DOCOL_CFA;
 
 #include "errors.h"
 #include "io.h"

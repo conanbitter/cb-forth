@@ -48,8 +48,19 @@
         { "type": "var", "name":"ERRCODE", "var":"error" },
 
         { "type": "forth", "name": "QUIT", "body":[
+            "LIT",
+            0,
+            "LIT",
+            2,
+            "LIT",
+            3,
+            "*",
             "DUP",
-			"BRANCH", 4,
+            "+",
+            "+",
+            "DUP",
+            ".",            
+			"BRANCH", -11,
 			"SWAP",
 			"EXIT"
         ]}

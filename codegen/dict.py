@@ -131,7 +131,7 @@ def add_forth(word_entry):
 
 words = []
 
-with open("dictionary.json", 'r') as f:
+with open("codegen/dictionary.json", 'r') as f:
     js = json.load(f)
     words = js['words']
 
@@ -181,8 +181,9 @@ for word in sysdict:
 
     total_cells += 1 + len(word.flagname) + 1 + len(word.data)
 
-with open("dict.c", 'w') as f:
-    f.write(f"static const Cell {DICT_NAME}[{total_cells}] = {{\n")
+with open("src/dict.c", 'w') as f:
+    f.write("#include \"common.h\"\n\n")
+    f.write(f"const Cell {DICT_NAME}[{total_cells}] = {{\n")  # static
     for row, data in zip(main_table, data_table):
         f.write("    ")
         f.write(row)
@@ -192,4 +193,4 @@ with open("dict.c", 'w') as f:
                 f.write("        " + data_item + "\n")
             f.write("\n")
 
-    f.write(f"}};\n\nconst Cell* {LATEST_NAME} = {DICT_NAME} + {latest.address};")
+    f.write(f"}};\n\nconst Cell* {LATEST_NAME} = {DICT_NAME} + {latest.address};")  # type: ignore

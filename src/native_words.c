@@ -262,6 +262,7 @@ void code_parse(Cell data) {
 void code_dot(Cell data) {
     Cell value = spop();
     print_int(value);
+    print_char(' ');
 }
 
 void code_pstack(Cell data) {

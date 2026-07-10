@@ -3,7 +3,7 @@
 
 int main() {
     init();
-    while (1)
+    /*while (1)
     {
         code_query(0);
         while (1) {
@@ -13,16 +13,14 @@ int main() {
                 break;
             }
         }
-    }
+    }*/
 
-    /*init();
-
-    word_ptr = CONST_SYS_LAST;
+    word_ptr = sys_dict + 158;
     while (1) {
         Cell* word = (Cell*)*word_ptr;
         word_ptr++;
         CodeFunc* code = (CodeFunc*)*word;
         (*code)(word);
-    }*/
+    }
     return 0;
 }

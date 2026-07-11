@@ -11,6 +11,7 @@ static Cell* rstack_ptr;
 Cell error;
 Cell base;
 Cell* latest;
+Cell state;
 
 void init() {
     stack_ptr = stack;
@@ -18,6 +19,7 @@ void init() {
     base = 10;
     error = 0;
     latest = (Cell*)SYS_LATEST;
+    state = FORTH_FALSE;
 }
 
 void spush(Cell data) {

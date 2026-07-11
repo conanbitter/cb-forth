@@ -6,6 +6,7 @@
             { "name": "BRANCH",  "code": "branch"  , "flags":["componly"]},
             { "name": "0BRANCH", "code": "zbranch" , "flags":["componly"]},
             { "name": "LIT",     "code": "lit"     , "flags":["componly"]},
+            { "name": "ERRTST",  "code": "errtst"  },
             { "name": ".",       "code": "dot"     },
             { "name": ".S",      "code": "pstack"  },
             { "name": "QUERY",   "code": "query"   },

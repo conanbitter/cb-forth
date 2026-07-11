@@ -7,6 +7,7 @@ extern Cell* word_ptr;
 extern Cell error;
 extern Cell base;
 extern Cell* latest;
+extern Cell state;
 
 void init();
 

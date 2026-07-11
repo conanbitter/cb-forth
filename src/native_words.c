@@ -179,6 +179,33 @@ void code_cr(Cell data) {
     print_char('\n');
 }
 
+void code_bl(Cell data) {
+    spush(' ');
+}
+
+void code_fetch(Cell data) {
+    Cell* addr = (Cell*)spop();
+    spush(*addr);
+}
+
+void code_store(Cell data) {
+    Cell* addr = (Cell*)spop();
+    Cell value = spop();
+    *addr = value;
+}
+
+void code_cfetch(Cell data) {
+    char* addr = (char*)spop();
+    char value = *addr;
+    spush((Cell)value);
+}
+
+void code_cstore(Cell data) {
+    char* addr = (char*)spop();
+    Cell value = spop();
+    *addr = (char)value;
+}
+
 // ===================
 //   WORD MANAGEMENT
 // ===================

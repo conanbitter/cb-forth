@@ -3,6 +3,8 @@
 
 void code_query(Cell data);
 void code_key(Cell data);
+void code_word(Cell data);
+void code_emit(Cell data);
 
 char get_key();
 void get_word();

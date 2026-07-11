@@ -32,6 +32,11 @@ void code_neq(Cell data);
 void code_less(Cell data);
 void code_greater(Cell data);
 void code_cr(Cell data);
+void code_bl(Cell data);
+void code_fetch(Cell data);
+void code_store(Cell data);
+void code_cfetch(Cell data);
+void code_cstore(Cell data);
 
 Cell* find_word();
 Cell* get_cfa(Cell* word);

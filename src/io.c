@@ -68,7 +68,7 @@ void get_word() {
     word_buffer[word_len] = '\0';
 }
 
-void code_word() {
+void code_word(Cell data) {
     get_word();
     spush((Cell)word_buffer);
     spush(word_len);
@@ -138,6 +138,10 @@ void print_int(Cell value) {
 
 void print_char(char value) {
     putchar(value);
+}
+
+void code_emit(Cell data) {
+    print_char(spop());
 }
 
 void print_str(const char* value) {

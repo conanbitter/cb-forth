@@ -8,6 +8,10 @@
             { "name": "LIT",     "code": "lit"     , "flags":["componly"]},
             { "name": ".",       "code": "dot"     },
             { "name": ".S",      "code": "pstack"  },
+            { "name": "QUERY",   "code": "query"   },
+            { "name": "WORD",    "code": "word"    },
+            { "name": "KEY",     "code": "key"     },
+            { "name": "EMIT",    "code": "emit"    },
             { "name": "DROP",    "code": "drop"    },
             { "name": "SWAP",    "code": "swap"    },
             { "name": "DUP",     "code": "dup"     },
@@ -36,7 +40,12 @@
             { "name": "<>",      "code": "neq"     },
             { "name": "<",       "code": "less"    },
             { "name": ">",       "code": "greater" },
-            { "name": "CR",      "code": "cr"      }
+            { "name": "CR",      "code": "cr"      },
+            { "name": "BL",      "code": "bl"      },
+            { "name": "@",       "code": "fetch"   },
+            { "name": "!",       "code": "store"   },
+            { "name": "C@",      "code": "cfetch"  },
+            { "name": "C!",      "code": "cstore"  }
         ] },
 
         { "type": "const", "words":[
@@ -44,21 +53,25 @@
             { "name": "VERSION", "const": "VERSION"    }
         ]},
 
-        { "type": "var", "name":"BASE", "var":"base" },
-        { "type": "var", "name":"ERRCODE", "var":"error" },
+        { "type": "var", "name":"BASE",  "var":"base"  },
+        { "type": "var", "name":"ERROR", "var":"error" },
 
         { "type": "forth", "name": "QUIT", "body":[
             "LIT",
             0,
             "CELL",
             "BASE",
+            "@",
             "*",
             "DUP",
             "+",
             "+",
             "DUP",
-            ".",            
-			"BRANCH", -11,
+            ".",
+            "DUP",
+            "BASE",
+            "!",
+			"BRANCH", -13,
 			"SWAP",
 			"EXIT"
         ]}

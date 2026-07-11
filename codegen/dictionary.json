@@ -1,12 +1,11 @@
 {
     "words": [
         { "type": "native", "words": [
-            { "name": "DOCOL",   "code": "docol"   , "flags":["hidden"]  },
             { "name": "EXIT",    "code": "exit"    , "flags":["componly"]},
             { "name": "BRANCH",  "code": "branch"  , "flags":["componly"]},
             { "name": "0BRANCH", "code": "zbranch" , "flags":["componly"]},
             { "name": "LIT",     "code": "lit"     , "flags":["componly"]},
-            { "name": "ERRTST",  "code": "errtst"  },
+            { "name": "ERRTST",  "code": "errtst"  , "flags":["hidden"]  },
             { "name": ".",       "code": "dot"     },
             { "name": ".S",      "code": "pstack"  },
             { "name": "QUERY",   "code": "query"   },
@@ -50,17 +49,20 @@
         ] },
 
         { "type": "const", "words":[
-            { "name": "CELL",    "const": "CELL_WIDTH" },
-            { "name": "VERSION", "const": "VERSION"    }
+            { "name": "DOCOL",   "const": "(Cell)&code_docol" },
+            { "name": "VERSION", "const": "VERSION"           }
         ]},
 
-        { "type": "var", "name":"BASE",  "var":"base"  },
-        { "type": "var", "name":"ERROR", "var":"error" },
+        { "type": "var", "words":[
+            { "name":"BASE",  "var":"base"  },
+            { "name":"ERROR", "var":"error" },
+            { "name":"STATE", "var":"state" }
+        ]},        
 
         { "type": "forth", "name": "QUIT", "body":[
             "LIT",
             0,
-            "CELL",
+            "VERSION",
             "BASE",
             "@",
             "*",

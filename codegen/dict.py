@@ -186,7 +186,7 @@ was_space = False
 consts = FormatTable(2)
 consts.add_row([f"const Cell* {LATEST_NAME}", f" = {abs_address(latest.address)};\n"])  # type: ignore
 consts.add_row(["const Cell* SYS_QUIT_CFA", f" = {abs_address(wordlist['QUIT'].cfa)};\n"])
-consts.add_row(["const Cell* SYS_DOCOL_CFA", f" = {abs_address(wordlist['DOCOL'].cfa)};\n"])
+consts.add_row(["const Cell* SYS_LIT_CFA", f" = {abs_address(wordlist['LIT'].cfa)};\n"])
 
 with open("src/dict.c", 'w') as f:
     f.write("#include \"common.h\"\n\n")

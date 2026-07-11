@@ -4,28 +4,28 @@
 //    BASIC
 // ===========
 
-void code_drop(Cell data) {
+void code_drop(Cell* data) {
     spop();
 }
 
-void code_swap(Cell data) {
+void code_swap(Cell* data) {
     Cell a = spop();
     Cell b = spop();
     spush(a);
     spush(b);
 }
 
-void code_dup(Cell data) {
+void code_dup(Cell* data) {
     Cell a = speek(0);
     spush(a);
 }
 
-void code_over(Cell data) {
+void code_over(Cell* data) {
     Cell a = speek(1);
     spush(a);
 }
 
-void code_rot(Cell data) {
+void code_rot(Cell* data) {
     // c b a -> b a c
     Cell a = spop();
     Cell b = spop();
@@ -35,7 +35,7 @@ void code_rot(Cell data) {
     spush(c);
 }
 
-void code_nrot(Cell data) {
+void code_nrot(Cell* data) {
     // c b a -> a c b
     Cell a = spop();
     Cell b = spop();
@@ -45,12 +45,12 @@ void code_nrot(Cell data) {
     spush(b);
 }
 
-void code_drop2(Cell data) {
+void code_drop2(Cell* data) {
     spop();
     spop();
 }
 
-void code_swap2(Cell data) {
+void code_swap2(Cell* data) {
     // d c b a -> b a d c
     Cell a = spop();
     Cell b = spop();
@@ -62,7 +62,7 @@ void code_swap2(Cell data) {
     spush(c);
 }
 
-void code_dup2(Cell data) {
+void code_dup2(Cell* data) {
     // b a -> b a b a
     Cell a = spop();
     Cell b = spop();
@@ -72,138 +72,143 @@ void code_dup2(Cell data) {
     spush(a);
 }
 
-void code_qdup(Cell data) {
+void code_qdup(Cell* data) {
     Cell a = speek(0);
     if (a != 0) spush(a);
 }
 
-void code_inc(Cell data) {
+void code_inc(Cell* data) {
     Cell a = spop();
     spush(a + 1);
 }
 
-void code_dec(Cell data) {
+void code_dec(Cell* data) {
     Cell a = spop();
     spush(a - 1);
 }
 
-void code_inc2(Cell data) {
+void code_inc2(Cell* data) {
     Cell a = spop();
     spush(a + 2);
 }
 
-void code_dec2(Cell data) {
+void code_dec2(Cell* data) {
     Cell a = spop();
     spush(a - 2);
 }
 
-void code_mul2(Cell data) {
+void code_mul2(Cell* data) {
     Cell a = spop();
     spush(a << 1);
 }
 
-void code_div2(Cell data) {
+void code_div2(Cell* data) {
     Cell a = spop();
     spush(a >> 1);
 }
 
-void code_inc4(Cell data) {
+void code_inc4(Cell* data) {
     Cell a = spop();
     spush(a + 4);
 }
 
-void code_dec4(Cell data) {
+void code_dec4(Cell* data) {
     Cell a = spop();
     spush(a - 1);
 }
 
-void code_mul4(Cell data) {
+void code_mul4(Cell* data) {
     Cell a = spop();
     spush(a << 2);
 }
 
-void code_div4(Cell data) {
+void code_div4(Cell* data) {
     Cell a = spop();
     spush(a >> 2);
 }
 
-void code_add(Cell data) {
+void code_add(Cell* data) {
     Cell a = spop();
     Cell b = spop();
     spush(b + a);
 }
 
-void code_sub(Cell data) {
+void code_sub(Cell* data) {
     Cell a = spop();
     Cell b = spop();
     spush(b - a);
 }
 
-void code_mul(Cell data) {
+void code_mul(Cell* data) {
     Cell a = spop();
     Cell b = spop();
     spush(b * a);
 }
 
-void code_div(Cell data) {
+void code_div(Cell* data) {
     Cell a = spop();
     Cell b = spop();
     spush(b / a);
 }
 
-void code_eq(Cell data) {
+void code_eq(Cell* data) {
     Cell a = spop();
     Cell b = spop();
     spush(a == b ? FORTH_TRUE : FORTH_FALSE);
 }
 
-void code_neq(Cell data) {
+void code_neq(Cell* data) {
     Cell a = spop();
     Cell b = spop();
     spush(a != b ? FORTH_TRUE : FORTH_FALSE);
 }
 
-void code_less(Cell data) {
+void code_less(Cell* data) {
     Cell a = spop();
     Cell b = spop();
     spush(b < a ? FORTH_TRUE : FORTH_FALSE);
 }
 
-void code_greater(Cell data) {
+void code_greater(Cell* data) {
     Cell a = spop();
     Cell b = spop();
     spush(b > a ? FORTH_TRUE : FORTH_FALSE);
 }
 
-void code_cr(Cell data) {
+void code_cr(Cell* data) {
     print_char('\n');
 }
 
-void code_bl(Cell data) {
+void code_bl(Cell* data) {
     spush(' ');
 }
 
-void code_fetch(Cell data) {
+void code_fetch(Cell* data) {
     Cell* addr = (Cell*)spop();
     spush(*addr);
 }
 
-void code_store(Cell data) {
+void code_store(Cell* data) {
     Cell* addr = (Cell*)spop();
     Cell value = spop();
     *addr = value;
 }
 
-void code_cfetch(Cell data) {
+void code_cfetch(Cell* data) {
     char* addr = (char*)spop();
     char value = *addr;
     spush((Cell)value);
 }
 
-void code_cstore(Cell data) {
+void code_cstore(Cell* data) {
     char* addr = (char*)spop();
     Cell value = spop();
     *addr = (char)value;
+}
+
+void code_cells(Cell* data) {
+    Cell value = spop();
+    spush(value * CELL_WIDTH);
 }
 
 // ===================
@@ -254,7 +259,7 @@ Cell* get_wha(Cell* word_code) {
     return word_code - 1 - name_length_cells;
 }
 
-void code_parse(Cell data) {
+void code_parse(Cell* data) {
     get_word();
 
     if (word_len == 0) {
@@ -286,12 +291,12 @@ void code_parse(Cell data) {
 //   INPUT/OUTPUT
 // ================
 
-void code_dot(Cell data) {
+void code_dot(Cell* data) {
     Cell value = spop();
     print_int(value);
     print_char(' ');
 }
 
-void code_pstack(Cell data) {
+void code_pstack(Cell* data) {
     sdump();
 }

@@ -14,7 +14,7 @@ bool is_space(char letter) {
     return letter == ' ' || letter == '\t' || letter == '\n';
 }
 
-void code_query(Cell data) {
+void code_query(Cell* data) {
     while (1) {
         print_char('>');
         fflush(stdout);
@@ -46,7 +46,7 @@ char get_key() {
     return *(caret++);
 }
 
-void code_key(Cell data) {
+void code_key(Cell* data) {
     spush((Cell)get_key());
 }
 
@@ -69,7 +69,7 @@ void get_word() {
     word_buffer[word_len] = '\0';
 }
 
-void code_word(Cell data) {
+void code_word(Cell* data) {
     get_word();
     spush((Cell)word_buffer);
     spush(word_len);
@@ -141,7 +141,7 @@ void print_char(char value) {
     putchar(value);
 }
 
-void code_emit(Cell data) {
+void code_emit(Cell* data) {
     print_char(spop());
 }
 

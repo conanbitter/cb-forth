@@ -47,7 +47,8 @@
             { "name": "@",       "code": "fetch"   },
             { "name": "!",       "code": "store"   },
             { "name": "C@",      "code": "cfetch"  },
-            { "name": "C!",      "code": "cstore"  }
+            { "name": "C!",      "code": "cstore"  },
+            { "name": "CELLS",   "code": "cells"   }
         ] },
 
         { "type": "const", "words":[

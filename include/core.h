@@ -9,7 +9,8 @@ extern Cell base;
 extern Cell* latest;
 extern Cell state;
 
-void init();
+void reset();
+void code_init(Cell data);
 
 void spush(Cell data);
 Cell spop();

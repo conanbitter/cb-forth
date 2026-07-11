@@ -13,13 +13,17 @@ Cell base;
 Cell* latest;
 Cell state;
 
-void init() {
+void reset() {
     stack_ptr = stack;
     rstack_ptr = rstack;
-    base = 10;
     error = 0;
-    latest = (Cell*)SYS_LATEST;
     state = FORTH_FALSE;
+}
+
+void code_init(Cell data) {
+    base = 10;
+    latest = (Cell*)SYS_LATEST;
+    reset();
 }
 
 void spush(Cell data) {

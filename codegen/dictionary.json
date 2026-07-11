@@ -1,11 +1,13 @@
 {
     "words": [
         { "type": "native", "words": [
+            { "name": "INIT",    "code": "init"    , "flags":["hidden"]  },
             { "name": "EXIT",    "code": "exit"    , "flags":["componly"]},
             { "name": "BRANCH",  "code": "branch"  , "flags":["componly"]},
             { "name": "0BRANCH", "code": "zbranch" , "flags":["componly"]},
             { "name": "LIT",     "code": "lit"     , "flags":["componly"]},
             { "name": "ERRTST",  "code": "errtst"  , "flags":["hidden"]  },
+            { "name": "PARSE",   "code": "parse"   , "flags":["hidden"]  },            
             { "name": ".",       "code": "dot"     },
             { "name": ".S",      "code": "pstack"  },
             { "name": "QUERY",   "code": "query"   },
@@ -57,26 +59,23 @@
             { "name":"BASE",  "var":"base"  },
             { "name":"ERROR", "var":"error" },
             { "name":"STATE", "var":"state" }
-        ]},        
+        ]},  
+        
+        { "type": "forth", "name": "INTERPRET", "body":[
+            "PARSE",
+            "ERROR", "@",
+            "?DUP",
+            "0BRANCH", -5,
+            "ERRTST",
+            "EXIT"
+        ]},
 
         { "type": "forth", "name": "QUIT", "body":[
-            "LIT",
-            0,
-            "VERSION",
-            "BASE",
-            "@",
-            "*",
-            "DUP",
-            "+",
-            "+",
-            "DUP",
-            ".",
-            "DUP",
-            "BASE",
-            "!",
-			"BRANCH", -13,
-			"SWAP",
-			"EXIT"
+            "INIT",
+            "QUERY",
+            "INTERPRET",
+            "CR",
+            "BRANCH", -4
         ]}
     ]
 }

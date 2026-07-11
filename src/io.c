@@ -16,6 +16,7 @@ bool is_space(char letter) {
 
 void code_query(Cell data) {
     while (1) {
+        print_char('>');
         fflush(stdout);
 
         if (fgets(input_buffer, INPUT_BUFFER_SIZE, stdin) == NULL) {

@@ -10,6 +10,10 @@ char word_buffer[INPUT_WORD_SIZE];
 Cell word_len = 0;
 char* caret;
 
+bool is_space(char letter) {
+    return letter == ' ' || letter == '\t' || letter == '\n';
+}
+
 void code_query(Cell data) {
     while (1) {
         fflush(stdout);
@@ -48,9 +52,8 @@ void code_key(Cell data) {
 void get_word() {
     word_len = 0;
     char letter = get_key();
-    if (letter == '\\') return;
-    while (letter == ' ' || letter == '\t') letter = get_key();
-    while (letter != '\0' && letter != ' ' && letter != '\t')
+    while (is_space(letter)) letter = get_key();
+    while (letter != '\0' && !is_space(letter))
     {
         if (word_len < (INPUT_WORD_SIZE - 1)) {
             if (letter >= 'a' && letter <= 'z') {

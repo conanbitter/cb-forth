@@ -21,7 +21,7 @@ def encode_name(name, flags):
 
     first_byte = len(name) | byte_flags
     name_cells = ceil((len(name) + 2) / CELL_WIDTH)
-    last_byte = name_cells | byte_flags
+    last_byte = name_cells
 
     name_sector = bytearray()
     name_sector.append(first_byte)

@@ -1,5 +1,9 @@
 #include "common.h"
 
+Cell roundup_to_cells(Cell value) {
+    return (value + (CELL_WIDTH - 1)) / CELL_WIDTH;
+}
+
 // ===========
 //    BASIC
 // ===========
@@ -250,12 +254,12 @@ Cell* find_word() {
 
 Cell* get_cfa(Cell* word) {
     uint8_t name_length = (*((uint8_t*)(word + 1))) & LENGTH_MASK;
-    Cell name_length_cells = (name_length + 2 + (CELL_WIDTH - 1)) / CELL_WIDTH;
+    Cell name_length_cells = roundup_to_cells(name_length + 2);
     return word + 1 + name_length_cells;
 }
 
 Cell* get_wha(Cell* word_code) {
-    uint8_t name_length_cells = (*((uint8_t*)word_code - 1)) & LENGTH_MASK;
+    uint8_t name_length_cells = (*((uint8_t*)word_code - 1));
     return word_code - 1 - name_length_cells;
 }
 

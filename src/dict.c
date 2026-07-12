@@ -1,13 +1,13 @@
 #include "common.h"
 
-static const Cell sys_dict[222] = {
-    (Cell)NULL,             0x494E4924, 0x22000054,             (Cell)&code_init,    // INIT      [0, CFA:3]
-    (Cell)(sys_dict + 0),   0x49584544, 0x42000054,             (Cell)&code_exit,    // EXIT      [4, CFA:7]
-    (Cell)(sys_dict + 4),   0x41524246, 0x4248434E,             (Cell)&code_branch,  // BRANCH    [8, CFA:11]
-    (Cell)(sys_dict + 8),   0x52423047, 0x48434E41, 0x43000000, (Cell)&code_zbranch, // 0BRANCH   [12, CFA:16]
-    (Cell)(sys_dict + 12),  0x54494C43, 0x42000000,             (Cell)&code_lit,     // LIT       [17, CFA:20]
-    (Cell)(sys_dict + 17),  0x52524526, 0x22545354,             (Cell)&code_errtst,  // ERRTST    [21, CFA:24]
-    (Cell)(sys_dict + 21),  0x52415025, 0x22004553,             (Cell)&code_parse,   // PARSE     [25, CFA:28]
+static const Cell sys_dict[226] = {
+    (Cell)NULL,             0x494E4924, 0x02000054,             (Cell)&code_init,    // INIT      [0, CFA:3]
+    (Cell)(sys_dict + 0),   0x49584544, 0x02000054,             (Cell)&code_exit,    // EXIT      [4, CFA:7]
+    (Cell)(sys_dict + 4),   0x41524246, 0x0248434E,             (Cell)&code_branch,  // BRANCH    [8, CFA:11]
+    (Cell)(sys_dict + 8),   0x52423047, 0x48434E41, 0x03000000, (Cell)&code_zbranch, // 0BRANCH   [12, CFA:16]
+    (Cell)(sys_dict + 12),  0x54494C43, 0x02000000,             (Cell)&code_lit,     // LIT       [17, CFA:20]
+    (Cell)(sys_dict + 17),  0x52524526, 0x02545354,             (Cell)&code_errtst,  // ERRTST    [21, CFA:24]
+    (Cell)(sys_dict + 21),  0x52415025, 0x02004553,             (Cell)&code_parse,   // PARSE     [25, CFA:28]
     (Cell)(sys_dict + 25),  0x01002E01,                         (Cell)&code_dot,     // .         [29, CFA:31]
     (Cell)(sys_dict + 29),  0x01532E02,                         (Cell)&code_pstack,  // .S        [32, CFA:34]
     (Cell)(sys_dict + 32),  0x45555105, 0x02005952,             (Cell)&code_query,   // QUERY     [35, CFA:38]
@@ -48,35 +48,36 @@ static const Cell sys_dict[222] = {
     (Cell)(sys_dict + 151), 0x01002101,                         (Cell)&code_store,   // !         [154, CFA:156]
     (Cell)(sys_dict + 154), 0x01404302,                         (Cell)&code_cfetch,  // C@        [157, CFA:159]
     (Cell)(sys_dict + 157), 0x01214302,                         (Cell)&code_cstore,  // C!        [160, CFA:162]
+    (Cell)(sys_dict + 160), 0x4C454305, 0x0200534C,             (Cell)&code_cells,   // CELLS     [163, CFA:166]
 
-    (Cell)(sys_dict + 160), 0x434F4405, 0x02004C4F,             (Cell)&code_docol,   // DOCOL     [163, CFA:166]
+    (Cell)(sys_dict + 163), 0x434F4405, 0x02004C4F,             (Cell)&code_docol,   // DOCOL     [167, CFA:170]
         (Cell)(sys_dict + 20),  // LIT
         (Cell)&code_docol,    
         (Cell)(sys_dict + 7),   // EXIT
 
-    (Cell)(sys_dict + 163), 0x52455607, 0x4E4F4953, 0x03000000, (Cell)&code_docol,   // VERSION   [170, CFA:174]
+    (Cell)(sys_dict + 167), 0x52455607, 0x4E4F4953, 0x03000000, (Cell)&code_docol,   // VERSION   [174, CFA:178]
         (Cell)(sys_dict + 20),  // LIT
         VERSION,              
         (Cell)(sys_dict + 7),   // EXIT
 
-    (Cell)(sys_dict + 170), 0x53414204, 0x02000045,             (Cell)&code_docol,   // BASE      [178, CFA:181]
+    (Cell)(sys_dict + 174), 0x53414204, 0x02000045,             (Cell)&code_docol,   // BASE      [182, CFA:185]
         (Cell)(sys_dict + 20),  // LIT
         (Cell)&base,          
         (Cell)(sys_dict + 7),   // EXIT
 
-    (Cell)(sys_dict + 178), 0x52524505, 0x0200524F,             (Cell)&code_docol,   // ERROR     [185, CFA:188]
+    (Cell)(sys_dict + 182), 0x52524505, 0x0200524F,             (Cell)&code_docol,   // ERROR     [189, CFA:192]
         (Cell)(sys_dict + 20),  // LIT
         (Cell)&error,         
         (Cell)(sys_dict + 7),   // EXIT
 
-    (Cell)(sys_dict + 185), 0x41545305, 0x02004554,             (Cell)&code_docol,   // STATE     [192, CFA:195]
+    (Cell)(sys_dict + 189), 0x41545305, 0x02004554,             (Cell)&code_docol,   // STATE     [196, CFA:199]
         (Cell)(sys_dict + 20),  // LIT
         (Cell)&state,         
         (Cell)(sys_dict + 7),   // EXIT
 
-    (Cell)(sys_dict + 192), 0x544E4909, 0x52505245, 0x03005445, (Cell)&code_docol,   // INTERPRET [199, CFA:203]
+    (Cell)(sys_dict + 196), 0x544E4909, 0x52505245, 0x03005445, (Cell)&code_docol,   // INTERPRET [203, CFA:207]
         (Cell)(sys_dict + 28),   // PARSE
-        (Cell)(sys_dict + 188),  // ERROR
+        (Cell)(sys_dict + 192),  // ERROR
         (Cell)(sys_dict + 153),  // @
         (Cell)(sys_dict + 90),   // ?DUP
         (Cell)(sys_dict + 16),   // 0BRANCH
@@ -84,16 +85,16 @@ static const Cell sys_dict[222] = {
         (Cell)(sys_dict + 24),   // ERRTST
         (Cell)(sys_dict + 7),    // EXIT
 
-    (Cell)(sys_dict + 199), 0x49555104, 0x02000054,             (Cell)&code_docol,   // QUIT      [212, CFA:215]
+    (Cell)(sys_dict + 203), 0x49555104, 0x02000054,             (Cell)&code_docol,   // QUIT      [216, CFA:219]
         (Cell)(sys_dict + 3),    // INIT
         (Cell)(sys_dict + 38),   // QUERY
-        (Cell)(sys_dict + 203),  // INTERPRET
+        (Cell)(sys_dict + 207),  // INTERPRET
         (Cell)(sys_dict + 147),  // CR
         (Cell)(sys_dict + 11),   // BRANCH
         -4,                    
 
 };
 
-const Cell* SYS_LATEST   = sys_dict + 212;
-const Cell* SYS_QUIT_CFA = sys_dict + 215;
+const Cell* SYS_LATEST   = sys_dict + 216;
+const Cell* SYS_QUIT_CFA = sys_dict + 219;
 const Cell* SYS_LIT_CFA  = sys_dict + 20;

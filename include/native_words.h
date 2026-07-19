@@ -47,4 +47,6 @@ void code_parse(Cell* data);
 void code_dot(Cell* data);
 void code_pstack(Cell* data);
 
+Cell roundup_to_cells(Cell value);
+
 #endif

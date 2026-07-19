@@ -23,6 +23,7 @@ void reset() {
 void code_init(Cell data) {
     base = 10;
     latest = (Cell*)SYS_LATEST;
+    init_userdict();
     reset();
 }
 

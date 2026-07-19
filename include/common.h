@@ -26,5 +26,6 @@ extern const Cell* SYS_DOCOL_CFA;
 #include "errors.h"
 #include "io.h"
 #include "native_words.h"
+#include "user_dict.h"
 
 #endif

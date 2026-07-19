@@ -188,7 +188,7 @@ consts.add_row([f"const Cell* {LATEST_NAME}", f" = {abs_address(latest.address)}
 consts.add_row(["const Cell* SYS_QUIT_CFA", f" = {abs_address(wordlist['QUIT'].cfa)};\n"])
 consts.add_row(["const Cell* SYS_LIT_CFA", f" = {abs_address(wordlist['LIT'].cfa)};\n"])
 
-with open("src/dict.c", 'w') as f:
+with open("src/sys_dict.c", 'w') as f:
     f.write("#include \"common.h\"\n\n")
     f.write(f"static const Cell {DICT_NAME}[{total_cells}] = {{\n")
     for row, data in zip(main_table, data_table):

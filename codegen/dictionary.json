@@ -9,6 +9,8 @@
             { "name": "ERRTST",  "code": "errtst"  , "flags":["hidden"]  },
             { "name": "PARSE",   "code": "parse"   , "flags":["hidden"]  },
             { "name": "NEWWORD", "code": "newword" },
+            { "name": ",",       "code": "comma"   },
+            { "name": "C,",      "code": "ccomma"  },
             { "name": ".",       "code": "dot"     },
             { "name": ".S",      "code": "pstack"  },
             { "name": "QUERY",   "code": "query"   },

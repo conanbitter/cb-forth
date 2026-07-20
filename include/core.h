@@ -25,5 +25,7 @@ void code_exit(Cell* data);
 void code_branch(Cell* data);
 void code_zbranch(Cell* data);
 void code_lit(Cell* data);
+void code_lbrac(Cell* data);
+void code_rbrac(Cell* data);
 
 #endif

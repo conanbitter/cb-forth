@@ -38,3 +38,25 @@ void code_ccomma(Cell* data) {
     *here = (uint8_t)value;
     here++;
 }
+
+void code_here(Cell* data) {
+    spush((Cell)here);
+}
+
+void code_immediate(Cell* data) {
+    Cell* flagname = latest + 1;
+    if (*flagname & FLAG_IMMED) {
+        *flagname &= ~FLAG_IMMED;
+    } else {
+        *flagname |= FLAG_IMMED;
+    }
+}
+
+void code_hidden(Cell* data) {
+    Cell* flagname = (Cell*)spop() + 1;
+    if (*flagname & FLAG_HIDDEN) {
+        *flagname &= ~FLAG_HIDDEN;
+    } else {
+        *flagname |= FLAG_HIDDEN;
+    }
+}

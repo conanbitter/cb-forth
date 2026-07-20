@@ -90,3 +90,11 @@ void code_lit(Cell* data) {
     spush(*word_ptr);
     word_ptr++;
 }
+
+void code_lbrac(Cell* data) {
+    state = FORTH_FALSE;
+}
+
+void code_rbrac(Cell* data) {
+    state = FORTH_TRUE;
+}

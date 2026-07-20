@@ -277,7 +277,7 @@ void code_parse(Cell* data) {
         Cell* word_code = get_cfa(word);
         CodeFunc* code = (CodeFunc*)*word_code;
         //printf("Running [sys_dict + %d]\n", word - sys_dict);
-        (*code)(word);
+        (*code)(word_code);
         return;
     }
 
